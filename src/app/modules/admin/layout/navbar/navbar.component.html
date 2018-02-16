@@ -1,0 +1,64 @@
+<md-sidenav-container class="example-container">
+  <md-sidenav #sidenav class="example-sidenav">
+    <ul class='nav nav-pills nav-stacked'>
+      <li *ngFor='let item of menuItems'>
+        <a md-button [routerLink]='item.routerLink' class='col-xs-12' (click)='sidenav.close()'>
+          <md-icon class='button-icon'>{{item.icon}}</md-icon> {{item.text}}
+        </a>
+      </li>
+    </ul>
+  </md-sidenav>
+
+  <div class="example-sidenav-content">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sideNav" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="navbar-brand" style='padding: 7px 0'>
+            <button md-icon-button (click)="sidenav.open()">
+              <md-icon>menu</md-icon>
+            </button>
+            <a routerLink="/tasks">OCTA</a>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse" matchHeightMax='match' id="sideNav">
+
+          <ul class="nav navbar-nav navbar-left text-center match" style='padding-left: 60px'>
+            <li class='text-center' *ngFor='let route of adminPanelRoutes'>
+              <a md-button class='text-center' routerLinkActive='active' [routerLink]="route.routerLink">
+                <md-icon class='button-icon'>{{route.icon}}</md-icon>
+                <span>{{route.text}}</span>
+              </a>
+            </li>
+            <div class="clearfix"></div>
+          </ul>
+
+          <ul class='nav navbar-nav navbar-right match text-center'>
+            <li class='col-xs-3 text-center'>
+              <a routerLink="/my-profile" md-icon-button mdTooltip='Profile' color="accent">
+                <md-icon>notifications</md-icon>
+              </a>
+            </li>
+            <li class='col-xs-3 text-center'>
+              <a md-icon-button mdTooltip='Notifications' color="accent">
+                <md-icon>account_circle</md-icon>
+              </a>
+            </li>
+            <li class='col-xs-3 text-center'>
+              <a md-icon-button mdTooltip='Logout' color="accent" (click)="_auth.logout()">
+                <md-icon>exit_to_app</md-icon>
+              </a>
+            </li>
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+</md-sidenav-container>

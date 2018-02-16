@@ -1,0 +1,20 @@
+<h2 class='text-center'>Pages</h2>
+
+<section *ngIf='!loading' class="container" matchHeightMax='match'>
+	<div style='margin-bottom: 15px'>
+    <button md-button class="text-center" (click)='openAddPageDialog()'>Add Page</button>
+	</div>
+	
+
+</section>
+
+<section *ngIf='loading' class='loading text-center'>
+    <md-spinner></md-spinner>
+</section>
+
+<section *ngIf='failed' class="failed text-center">
+    <h3>
+        Packages loading failed, please check your connection and try again.
+    </h3>
+    <button md-button (click)='getDBPages()'>Try Again</button>
+</section>

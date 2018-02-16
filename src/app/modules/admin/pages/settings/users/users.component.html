@@ -1,0 +1,74 @@
+<h2 class='text-center'>Users</h2>
+
+<section *ngIf='!loading' class="container" matchHeightMax='match'>
+	<div style='margin-bottom: 15px'>
+		<button md-button class="text-center" (click)='openAddUserForm()'>Add user</button>
+	</div>
+
+	<!-- Active Packages Loop -->
+	<div *ngFor='let user of users.active' class='col-lg-3 col-md-4 col-xs-6'>
+		<div class="user card match">
+			<!-- <span class='card-state inactive' (click)='updateStatus(user._id, false)' *ngIf='(user)?.STATE'>Deactivate</span>
+      <span class='card-state active' (click)='updateStatus(user._id, true)' *ngIf='!(user)?.STATE'>Activate</span> -->
+			<h5>{{(user)?.FULL_NAME}}</h5>
+			<ul>
+				<li>
+					<strong>Roles</strong> <span *ngFor='let role of user.ROLES'>{{role}} | </span>
+				</li>
+				<li>
+					<strong>Salary</strong> <span>{{(user)?.SALARY}}</span>
+				</li>
+				<li>
+					<strong>Email</strong> <span>{{(user)?.EMAIL}}</span>
+				</li>
+			</ul>
+			<div class="text-right">
+        <button md-button (click)='openUpdateUserDialog(user)'>
+          <md-icon>mode_edit</md-icon>
+          <span>Update</span>
+        </button>
+      </div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+
+	<hr>
+
+	<div *ngFor='let user of users.suspended' class='col-lg-3 col-md-4 col-xs-6'>
+		<div class="user card match">
+			<!-- <span class='card-state inactive' (click)='updateStatus(user._id, false)' *ngIf='(user)?.STATE'>Deactivate</span>
+      <span class='card-state active' (click)='updateStatus(user._id, true)' *ngIf='!(user)?.STATE'>Activate</span> -->
+			<h5>{{(user)?.FULL_NAME}}</h5>
+			<ul>
+				<li>
+					<strong>Roles</strong> <span>{{(user)?.ROLES}}</span>
+				</li>
+				<li>
+					<strong>Salary</strong> <span>{{(user)?.SALARY}}</span>
+				</li>
+				<li>
+					<strong>Email</strong> <span>{{(user)?.EMAIL}}</span>
+				</li>
+			</ul>
+			<div class="text-right">
+        <button md-button (click)='openUpdateUserDialog(user)'>
+          <md-icon>mode_edit</md-icon>
+          <span>Edit</span>
+        </button>
+      </div>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+</section>
+
+<section *ngIf='loading' class='loading text-center'>
+	<md-spinner></md-spinner>
+</section>
+
+<section *ngIf='failed' class="failed text-center">
+	<h3>
+		Users loading failed, please check your connection and try again.
+	</h3>
+	<button md-button (click)='getUsers()'>Try Again</button>
+</section>

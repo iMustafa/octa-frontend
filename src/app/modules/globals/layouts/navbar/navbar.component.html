@@ -1,0 +1,52 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header" style="min-height:65px;">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sideNav" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      <a class="navbar-brand" routerLink="/tasks" style='margin-top: 10px'>OCTA</a>
+    </div>
+    <div class="collapse navbar-collapse" id="sideNav">
+      <ul class="nav navbar-nav navbar-right col-md-6 col-xs-12 text-center" matchHeightMax='match'>
+        <li class='col-md-7 col-xs-12 match'>
+          <ul class='col-xs-12' style='height: 100%; list-style: none; margin-top: 5px'>
+            <li class='col-xs-4 text-center'>
+              <a md-button class='text-center' routerLinkActive='active' routerLink="/tasks">TASKS</a>
+            </li>
+            <li class='col-xs-4 text-center'>
+              <a md-button class='text-center' routerLinkActive='active' routerLink="/pages" *ngIf="admin">PAGES</a>
+            </li>
+            <li class='col-xs-4 text-center'>
+              <a md-button class='text-center' routerLinkActive='active' routerLink="/all-members" *ngIf="admin">MEMBERS</a>
+            </li>
+            <div class="clearfix"></div>
+          </ul>
+        </li>
+        <li class='col-md-5 col-xs-12 match'>
+          <ul class='col-xs-12' style='height: 100%; list-style: none'>
+            <li class='col-xs-4 text-center'>
+              <button routerLink="/my-profile" md-icon-button mdTooltip='Profile' color="accent">
+                <md-icon>notifications</md-icon>
+              </button>
+            </li>
+            <li class='col-xs-4 text-center'>
+              <button md-icon-button mdTooltip='Notifications' color="accent">
+                <md-icon>account_circle</md-icon>
+              </button>
+            </li>
+            <li class='col-xs-4 text-center'>
+              <button md-icon-button mdTooltip='Logout' color="accent" (click)="_auth.logout()">
+                <md-icon>exit_to_app</md-icon>
+              </button>
+            </li>
+            <div class="clearfix"></div>
+          </ul>
+        </li>
+        <div class="clearfix"></div>
+      </ul>
+    </div>
+  </div>
+</nav>

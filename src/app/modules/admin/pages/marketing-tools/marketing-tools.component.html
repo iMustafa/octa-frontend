@@ -1,0 +1,186 @@
+<admin-navbar></admin-navbar>
+
+<h2 class='text-center'>Marketing Tools</h2>
+
+<div class="container" *ngIf='!loadingView'>
+	<form [formGroup]='pageSelectForm'>
+		<md-select class='col-xs-5' formControlName='pageName' placeholder='Select Page'>
+			<md-option *ngFor='let page of pages' [value]='page'>
+				{{page.NAME}}
+			</md-option>
+		</md-select>
+		<div class="clearfix"></div>
+	</form>
+	<main class='row' *ngIf='selectedPage'>
+		<div class='section-one col-xs-4'>
+			<section>
+				<h3 class="section-title">Package Details</h3>
+				<div class="row">
+					<strong>Package Name:</strong>
+					<span class='heavy-span'>{{selectedPage.CONTRACTS[selectedPage.CONTRACTS.length - 1].PACKAGE.NAME}}</span>
+				</div>
+				<div class="row">
+					<strong>Price: </strong>
+					<span class='heavy-span'>{{selectedPage.CONTRACTS[selectedPage.CONTRACTS.length - 1].PACKAGE.PRICE}}</span>
+				</div>
+				<div class="row">
+					<strong>Reach: </strong>
+					<span class='heavy-span'>{{selectedPage.CONTRACTS[selectedPage.CONTRACTS.length - 1].PACKAGE.REACH}}</span>
+				</div>
+				<div class="row">
+					<strong>Posts: </strong>
+					<span class='heavy-span'>{{selectedPage.CONTRACTS[selectedPage.CONTRACTS.length - 1].PACKAGE.POSTS}}</span>
+				</div>
+				<div class="row">
+					<strong>Start Date: </strong>
+					<span class='heavy-span'>{{selectedPage.CONTRACTS[selectedPage.CONTRACTS.length - 1].START_TIME | date: 'fullDate'}}</span>
+				</div>
+				<div class="row">
+					<strong>End Date: </strong>
+					<span class='heavy-span'>{{selectedPage.CONTRACTS[selectedPage.CONTRACTS.length - 1].RENEWAL_TIME | date: 'fullDate'}}</span>
+				</div>
+			</section>
+			<section>
+				<h3 class="section-title">Administration</h3>
+				<div class="row">
+					<strong>Done Posts: </strong>
+					<span class='heavy-span'>{{(pageTasks)?.done?.done?.length}}</span>
+				</div>
+				<div class="row">
+					<strong>Scheduled Posts: </strong>
+					<span class='heavy-span'>{{(pageTasks)?.inactive?.inactive?.length}}</span>
+				</div>
+				<div class="row">
+					<strong>In-Progress Posts: </strong>
+					<span class='heavy-span'>{{(pageTasks)?.active?.in_progress?.length}}</span>
+				</div>
+				<div class="row">
+					<strong>Late Posts: </strong>
+					<span class='heavy-span'>{{(pageTasks)?.active?.late?.length}}</span>
+				</div>
+				<div class="row">
+					<strong>Done Late Posts: </strong>
+					<span class='heavy-span'>{{(pageTasks)?.done?.done_late?.length}}</span>
+				</div>
+			</section>
+			<section>
+				<h3 class="section-title">Post / Reach</h3>
+				<ol>
+					<li *ngFor='let post of postsGraphInfo'>
+						<strong class='col-xs-12'>{{post.id}}</strong>
+						<span class='col-xs-4'>
+							<strong class="heavy-span">Organic</strong><br>
+							<span>{{post.totalReach - post.paidReach}}</span>
+						</span>
+						<span class='col-xs-4'>
+							<strong class="heavy-span">Paid</strong><br>
+							<span>{{post.paidReach}}</span>
+						</span>
+						<span class='col-xs-4'>
+							<strong class="heavy-span">Total</strong><br>
+							<span>{{post.totalReach}}</span>
+						</span>
+						<div class="clearfix"></div>
+					</li>
+				</ol>
+			</section>
+		</div>
+		<div class='section-two col-xs-4'>
+			<section>
+				<h3 class="section-title">Reach</h3>
+				<div class="row">
+					<strong>Daily Reach (Average): </strong>
+					<span class='heavy-span'></span>
+				</div>
+				<div class="row">
+					<strong>Daily Reach (Total): {{pageGraphInfo.totalDailyReach}}</strong>
+					<span class='heavy-span'></span>
+				</div>
+				<div class="row">
+					<strong>Posts Reach (Average): </strong>
+					<span class='heavy-span'></span>
+				</div>
+				<div class="row">
+					<strong>Posts Reach (Total): {{pageGraphInfo.totalPostsReach}}</strong>
+					<span class='heavy-span'></span>
+				</div>
+			</section>
+			<section>
+				<h3 class="section-title">Engagement</h3>
+				<div class="row">
+					<strong>Comments: </strong>
+					<span class='heavy-span'>{{pageGraphInfo.pageTotalFeebacks?.comment}}</span>
+				</div>
+				<div class="row">
+					<strong>Post Likes: </strong>
+					<span class='heavy-span'>{{pageGraphInfo.pageTotalFeebacks?.like}}</span>
+				</div>
+				<div class="row">
+					<strong>Page Likes: </strong>
+					<span class='heavy-span'>{{pageGraphInfo.pageLikes}}</span>
+				</div>
+				<div class="row">
+					<strong>Shares: </strong>
+					<span class='heavy-span'>{{pageGraphInfo.pageTotalFeebacks?.link}}</span>
+				</div>
+				<div class="row">
+					<strong>CTA: </strong>
+					<span class='heavy-span'>{{pageGraphInfo.pageCTA}}</span>
+				</div>
+			</section>
+			<section>
+				<h3 class="section-title">KPI Observation</h3>
+				<table>
+					<thead>
+						<tr>
+							<th><span class="light-span">KPI</span></th>
+							<th><span class="light-span">Target</span></th>
+							<th><span class="light-span">Done</span></th>
+							<th><span class="light-span">Comment</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Engagement Rate</th>
+							<th>0.5%</th>
+							<th>{{(pageGraphInfo.postEngagements / pageGraphInfo.totalDailyReach) * 100}}</th>
+							<th>Lower</th>
+						</tr>
+						<tr>
+							<th>Conversion Rate</th>
+							<th>0.2%</th>
+							<th>{{(pageGraphInfo.pageCTA / pageGraphInfo.totalDailyReach) * 100}}</th>
+							<th>Lower</th>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+		<div class='section-three col-xs-4'>
+			<section>
+				<h3 class="section-title">Finance</h3>
+				<div class="row">
+					<strong>Total Spent: </strong>
+					<span class='heavy-span'>{{pageGraphInfo.totalSpent}}</span>
+				</div>
+			</section>
+			<section>
+				<h3 class="section-title">Performance</h3>
+			</section>
+			<section>
+				<h3 class="section-title">Actions</h3>
+			</section>
+		</div>
+		<div class="clearfix"></div>
+	</main>
+</div>
+
+<section *ngIf='loadingView || loadingPage' class='loading text-center'>
+	<md-spinner></md-spinner>
+</section>
+
+<section *ngIf='failedToGetView || failedToGetPage' class="failed text-center">
+	<h3>
+		Page loading failed, please check your connection and try again.
+	</h3>
+</section>

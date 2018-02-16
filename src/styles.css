@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded|Pangolin|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Changa');
+@import url("https://fonts.googleapis.com/css?family=Nosifer");
+@font-face {
+    font-family: 'Mark-Gurgius-Wants-This';
+    src: url('./assets/fonts/font.ttf');
+}
+
+body {
+    /* background: linear-gradient(to bottom, #0a2d3a, #15394e); */
+}
+
+md-icon {
+    font-family: Material Icons !important
+}
+
+h2.main-title {
+    color: #FFF;
+    text-align: center;
+    font-family: 'Encode Sans Expanded', sans-serif;
+    text-transform: uppercase;
+    margin-top: 5px
+}
+
+h2.main-title span {
+    display: inline-block;
+    padding: 0 10px 5px 10px;
+    border-bottom: 1px solid #FFF
+}
+.cdk-overlay-pane {
+    left: 38%
+}
+
+.no-tasks {
+    text-align: center; font-family: sans-serif;text-shadow: rgb(130, 134, 136) 0px 0px 0px, #000000 0px 0px 0px; font-weight: bold; font-size: 3em; color: #aaaaaa;
+}
+
+.button-icon {
+    font-size: 23px !important
+}
+
+.card h5 {
+    font-family: 'Mark-Gurgius-Wants-This'
+}

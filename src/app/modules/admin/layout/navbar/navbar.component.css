@@ -1,0 +1,111 @@
+nav {
+    background-color: #e0e0e0;
+    overflow: hidden
+}
+
+.navbar-default {
+    border-color: transparent;
+    margin: 0;
+    border-radius: 0;
+    color: #888
+}
+
+.navbar-default *:not(md-icon) {
+    font-family: 'Mark-Gurgius-Wants-This';
+    font-size: 20px;
+    color: #414141
+}
+
+.navbar-brand a {
+    font-size: 32px;
+    position: relative;
+    top: 3.3px
+}
+
+.navbar-brand button {
+    position: relative;
+    top: -1.5px;
+}
+
+.navbar-right {
+    position: relative;
+    left: 40px;
+}
+
+md-icon {
+    color: #414141 !important;
+    font-size: 25px !important
+}
+
+a {
+    text-decoration: none !important;
+    outline: none !important
+}
+
+.mat-drawer-container {
+    overflow: visible !important
+}
+
+md-sidenav {
+    min-height: 100vh;
+    min-width: 20%;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 5px 0 5px -5px #333;
+}
+
+@media only screen and (max-width: 768px) {
+    md-sidenav {
+        min-width: 40%;
+    }   
+}
+
+md-list-item {
+    text-align: center
+}
+
+.navbar-default {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 4px 14px -10px rgba(0,0,0,0.4)
+}
+
+.navbar-toggle {
+    padding: 0;
+    margin: 4px 3px 0 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent !important
+}
+
+.application-brand {
+    display: inline-block;
+    margin-top: 4px
+}
+
+.app-name {
+    color: #333;
+    text-decoration: none;
+    font-family: 'Encode Sans Expanded', sans-serif;
+    font-size: 16px;
+}
+ 
+md-icon {
+    font-size: 30px
+}
+
+.parent-menu-item {
+    background-color: #CFCFCF;
+    color: #333
+}
+
+.list-group-item {
+    outline: none;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 17px;
+    font-family: 'Encode Sans Expanded', sans-serif;
+}

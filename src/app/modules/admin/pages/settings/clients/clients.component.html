@@ -1,0 +1,94 @@
+<h2 class='text-center'>Clients</h2>
+
+<div class="container" *ngIf='!loading'>
+  <div *ngFor='let client of clients.active' class='col-lg-3 col-md-4 col-xs-6'>
+    <div class="client card match">
+      <span class='card-state active'>{{(client)?.STATE | getState: 'CLIENT_STATE'}}</span>
+      <h5>{{(client)?.FULL_NAME}}</h5>
+      <ul>
+        <li>
+          <strong>Email</strong> <span>{{(client)?.EMAIL}}</span>
+        </li>
+        <li>
+          <strong>Phone Number</strong> <span>{{(client)?.PHONE_NUMBER}}</span>
+        </li>
+        <li>
+          <strong>First Deal</strong> <span>{{(client)?.CREATE_TIME | date: 'fullDate'}}</span>
+        </li>
+        <li>
+          <strong>Facebook Pages</strong> <span>{{(client)?.FACEBOOK_PAGES?.length}}</span>
+        </li>
+        <li>
+          <strong>Contracts Made</strong> <span>{{(client)?.CONTRACTS?.length}}</span>
+        </li>
+      </ul>
+      <div class="text-center">
+        <button md-button (click)='suspendClient(client._id, !client.STATE)'>
+          <md-icon *ngIf='client.STATE'>pause_circle_outline</md-icon>
+          <span *ngIf='client.STATE'>Suspend Client</span>
+
+          <md-icon *ngIf='!client.STATE'>play_circle_outline</md-icon>
+          <span *ngIf='!client.STATE'>Activate Client</span>
+        </button>
+        <button md-button (click)='openAddContractDialog(client)'>
+          <md-icon>note_add</md-icon>
+          Add Contract
+        </button>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+  <hr>
+
+  <div *ngFor='let client of clients.suspended' class='col-lg-3 col-md-4 col-xs-6'>
+    <div class="client card match">
+      <span class='card-state inactive'>{{(client)?.STATE | getState: 'CLIENT_STATE'}}</span>
+      <h5>{{(client)?.FULL_NAME}}</h5>
+      <ul>
+        <li>
+          <strong>Email</strong> <span>{{(client)?.EMAIL}}</span>
+        </li>
+        <li>
+          <strong>Phone Number</strong> <span>{{(client)?.PHONE_NUMBER}}</span>
+        </li>
+        <li>
+          <strong>First Deal</strong> <span>{{(client)?.CREATE_TIME | date: 'fullDate'}}</span>
+        </li>
+        <li>
+          <strong>Facebook Pages</strong> <span>{{(client)?.FACEBOOK_PAGES?.length}}</span>
+        </li>
+        <li>
+          <strong>Contracts Made</strong> <span>{{(client)?.CONTRACTS?.length}}</span>
+        </li>
+      </ul>
+      <div class="text-center">
+        <button md-button (click)='suspendClient(client._id, !client.STATE)'>
+          <md-icon *ngIf='client.STATE'>pause_circle_outline</md-icon>
+          <span *ngIf='client.STATE'>Suspend Client</span>
+  
+          <md-icon *ngIf='!client.STATE'>play_circle_outline</md-icon>
+          <span *ngIf='!client.STATE'>Activate Client</span>
+        </button>
+        <button md-button (click)='openAddContractDialog(client)'>
+          <md-icon>note_add</md-icon>
+          Add Contract
+        </button>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section *ngIf='loading' class='loading text-center'>
+  <md-spinner></md-spinner>
+</section>
+
+<section *ngIf='failed' class="failed text-center">
+  <h3>
+    Packages loading failed, please check your connection and try again.
+  </h3>
+  <button md-button (click)='getPackages()'>Try Again</button>
+</section>

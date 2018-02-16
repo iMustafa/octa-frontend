@@ -1,0 +1,43 @@
+nav {
+    background-color: #AAA
+}
+
+.navbar-default {
+    border-color: transparent;
+    margin: 0;
+    border-radius: 0;
+    color: #888
+}
+
+.navbar-default * {
+    color: #333
+}
+
+ul.navbar-right {
+    margin-top: 10px
+}
+
+.sidenav {
+    position: fixed;
+    top: 0;
+    width: 40%;
+    height: 100%;
+    background-color: #FFF
+}
+.links_ul {
+    list-style: none;
+    margin-top: 80px;
+    display: inline-block;
+    padding-left: 0px;
+}
+
+
+md-icon {
+    color: #333 !important;
+    font-size: 30px
+}
+
+a {
+    text-decoration: none !important;
+    outline: none !important
+}

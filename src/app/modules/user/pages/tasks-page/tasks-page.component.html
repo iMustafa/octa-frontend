@@ -1,0 +1,78 @@
+<main class="tasks-page">
+	<!-- <app-navbar></app-navbar> -->
+	<h2 class='text-center'>Tasks</h2>
+
+	<section *ngIf='!loading' class="container" matchHeightMax='match'>
+		<form [formGroup]='dateRangeForm' (ngSubmit)='getTasksByDateRange(dateRangeForm)'>
+			<md-select class='col-xs-3' formControlName='TIME' placeholder="Filter by">
+				<md-option value="in_progress">In Progress</md-option>
+				<md-option value="late">Late</md-option>
+			</md-select>
+			<section class="col-xs-9">
+				<md-form-field class="col-xs-6">
+					<input mdInput formControlName='SINCE' [mdDatepicker]="SINCE_PICKER" placeholder="Start Date">
+					<md-datepicker-toggle mdSuffix [for]="SINCE_PICKER"></md-datepicker-toggle>
+					<md-datepicker #SINCE_PICKER></md-datepicker>
+				</md-form-field>
+				<md-form-field class="col-xs-6">
+					<input mdInput formControlName='UNTIL' [mdDatepicker]="UNTIL_PICKER" placeholder="End Date">
+					<md-datepicker-toggle mdSuffix [for]="UNTIL_PICKER"></md-datepicker-toggle>
+					<md-datepicker #UNTIL_PICKER></md-datepicker>
+				</md-form-field>
+			</section>
+			<div class="clearfix"></div>
+			<div class="text-center">
+				<button md-button type='submit'>Filter</button>
+				<button md-button type='button' (click)='getTasks()'>Reset Filter</button>
+			</div>
+		</form>
+
+		<hr>
+
+		<!-- Active Packages Loop -->
+		<div *ngFor='let task of tasks' class='col-lg-3 col-md-4 col-xs-6'>
+			<div class="user card match">
+				<span class='card-state inactive' (click)='changeTaskState(task)' *ngIf='(task)?.STATE'>Mark Undone</span>
+				<span class='card-state active' (click)='changeTaskState(task)' *ngIf='!(task)?.STATE'>Mark Done</span>
+				<h5>{{(task)?.NAME}}</h5><br>
+				<span style='margin-bottom: 10px'>{{(task)?.message}}</span>
+				<ul>
+					<hr>
+					<li>
+						<strong>Start Time</strong> <span>{{(task)?.START_TIME | date:'fullDate'}}</span>
+					</li>
+					<li>
+						<strong>Deadline</strong> <span>{{(task)?.DEAD_LINE | date:'fullDate'}}</span>
+					</li>
+					<hr>
+					<li>
+						<strong>Page</strong> <span>{{(task)?.PAGE?.NAME}}</span>
+					</li>
+					<li>
+						<strong>Descreption</strong> <span>{{(task)?.DESCRIPTION}}</span>
+					</li>
+				</ul>
+				<div class="text-right">
+					<button md-button (click)='openUpdateTaskDialog(task)'>
+						<md-icon>mode_edit</md-icon>
+						<span>Update</span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="clearfix"></div>
+	</section>
+
+	<section *ngIf='loading' class='loading text-center'>
+		<md-spinner></md-spinner>
+	</section>
+
+	<section *ngIf='failed' class="failed text-center">
+		<h3>
+			Users loading failed, please check your connection and try again.
+		</h3>
+		<button md-button (click)='getUsers()'>Try Again</button>
+	</section>
+</main>

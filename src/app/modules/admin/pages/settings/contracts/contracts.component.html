@@ -1,0 +1,91 @@
+<h2 class='text-center'>Contracts</h2>
+
+<section *ngIf='!loading' class="container">
+  <div style='margin-bottom: 15px'>
+    <button md-button class="text-center" (click)='openAddContractDialog()'>Create Contract</button>
+  </div>
+
+  <!-- Active Packages Loop -->
+  <section matchHeightMax='match'>
+    <div *ngFor='let contract of contracts.active' class='col-lg-3 col-md-4 col-xs-6'>
+      <div class="contract card match">
+        <!-- <span class='card-state'>Deactivate</span> -->
+        <h5>{{(contract)?.PAGE?.NAME}}</h5>
+        <ul>
+          <li>
+            <strong>Client</strong> <span>{{(contract)?.CLIENT?.FULL_NAME}}</span>
+          </li>
+          <li>
+            <strong>Start Date</strong> <span>{{(contract)?.START_TIME | date: 'longDate'}}</span>
+          </li>
+          <li>
+            <strong>Expire Date</strong> <span>{{(contract)?.RENEWAL_TIME | date: 'longDate'}}</span>
+          </li>
+          <li>
+            <strong>Contracts By Client</strong> <span>{{(contract)?.CLIENT?.CONTRACTS?.length}}</span>
+          </li>
+        </ul>
+        <div class="text-center">
+          <button md-button (click)='openExtendContractDialog(contract)'>
+            <md-icon>date_range</md-icon>
+            <span>Extend Contract</span>
+          </button>
+          <button md-button>
+            <md-icon>pause_circle_outline</md-icon>
+            <span>Suspend Contract</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </section>
+
+  <hr>
+
+  <!-- Inactive Packages Loop -->
+  <section matchHeightMax='match'>
+    <div *ngFor='let contract of contracts.suspended' class='col-lg-3 col-md-4 col-xs-6'>
+      <div class="contract card match">
+        <!-- <span class='card-state'>Deactivate</span> -->
+        <h5>{{(contract)?.PAGE?.NAME}}</h5>
+        <ul>
+          <li>
+            <strong>Client</strong> <span>{{(contract)?.CLIENT?.FULL_NAME}}</span>
+          </li>
+          <li>
+            <strong>Start Date</strong> <span>{{(contract)?.START_TIME | date: 'longDate'}}</span>
+          </li>
+          <li>
+            <strong>Expire Date</strong> <span>{{(contract)?.RENEWAL_TIME | date: 'longDate'}}</span>
+          </li>
+          <li>
+            <strong>Contracts By Client</strong> <span>{{(contract)?.CLIENT?.CONTRACTS?.length}}</span>
+          </li>
+        </ul>
+        <div class="text-center">
+          <button md-button *ngIf='!contract.STATE && system.getDate(contract.RENEWAL_TIME) > _date'>
+            <md-icon>play_circle_outline</md-icon>
+            <span>Reactivate Contract</span>
+          </button>
+          <button md-button (click)='openExtendContractDialog(contract)' *ngIf='system.getDate(contract.RENEWAL_TIME) < _date'>
+            <md-icon>note_add</md-icon>
+            <span>Renew Contract</span>
+            </button>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </section>
+
+</section>
+
+<section *ngIf='loading' class='loading text-center'>
+  <md-spinner></md-spinner>
+</section>
+
+<section *ngIf='failed' class="failed text-center">
+  <h3>
+    Packages loading failed, please check your connection and try again.
+  </h3>
+  <button md-button (click)='getPackages()'>Try Again</button>
+</section>
